@@ -1,0 +1,15 @@
+# .html as .php
+AddType application/x-httpd-php .html .php
+
+# urls 
+# use [R] flag to force url in location bar
+RewriteEngine on
+RewriteBase /
+RewriteRule ^about$			words.html?id=96
+RewriteRule ^journal$			words.html?id=82553
+RewriteRule ^subscribe$			words.html?id=83066
+RewriteRule ^subscribe-thankyou$	words.html?id=83068&back=-1
+RewriteRule ^subscribe-error$		words.html?id=83069&back=-1
+RewriteRule ^join$			words.html?id=407
+
+# RewriteRule ^subscribe$		words.html?id=390

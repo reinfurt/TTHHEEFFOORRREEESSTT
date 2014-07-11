@@ -1,0 +1,4 @@
+AuthUserFile /usr/home/pl2022/.htpasswd
+AuthName "OPEN-RECORDS-GENERATOR"
+AuthType Basic
+Require valid-user

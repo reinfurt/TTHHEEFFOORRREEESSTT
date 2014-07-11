@@ -1,0 +1,90 @@
+<?php 
+require_once("GLOBAL/head.php"); 
+?>
+
+
+<!-- MAIN -->
+
+<div id='main' class='bodyContainer'>
+
+	<?php
+			
+		// SQL object only
+				
+		$sql    = "SELECT * FROM objects WHERE objects.id = $id;";
+		$result =  MYSQL_QUERY($sql);
+		$myrow  =  MYSQL_FETCH_ARRAY($result);
+		$deck = $myrow["deck"];
+		$body = $myrow["body"];
+		$name1 = $myrow["name1"];
+		$thistag = $myrow["url"];		
+		$html = "";
+		$html .= $deck . "<br />";
+
+
+		// SQL object plus media	
+
+		$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as 
+objectsRank, wires.fromid, wires.toid, wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
+media.active, media.rank FROM objects, wires, media WHERE objects.id = $id AND wires.toid = objects.id AND media.object = 
+objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY media.rank;";
+
+		$result =  MYSQL_QUERY($sql);
+		
+	        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+
+        	        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+                	$mediaCaption = strip_tags($myrow["caption"]);
+			$randWidth = rand(10, 40);
+	                $mediaStyle = "width: " . $randWidth . "%;";
+	                // $mediaStyle = "width: 100%;";
+        	        $images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
+	                $images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+        	        // $images[$i] .= "<div class = 'captionContainer caption'>";
+	                // $images[$i] .= $mediaCaption . "<br /><br />";
+        	        // $images[$i] .= "</div>";
+	                $images[$i] .= "</div>";
+        	        $i++;
+		}
+
+		$html .= "<br /><br /><br /><br /><br />" . $body . "<br />";
+		$html .= "</div>";
+
+
+    		// images
+
+		$html .= "<div id='main' class='imagesContainer'>";
+
+	        for ( $j = 0; $j < count($images); $j++) {
+	
+        	        $html .= $images[$j];
+        	}
+
+		$html .= "</div>";
+		echo nl2br($html);
+                
+
+		// SQL related objects
+
+                $html   = "<div id='relatednav' class='navContainer'>";
+		$html  .= "<br /><br />";
+		$html  .= "<br />* <br /><br />More $thistag . . . <br />";
+		$sql    = "SELECT id, name1 FROM objects WHERE objects.url LIKE '$thistag' ORDER BY name1;";
+		$result =  MYSQL_QUERY($sql);
+                        
+		while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+	                        
+			$name2 = $myrow["name1"];
+			$thisid = $myrow["id"];
+			$html .= "<a href='detail.html?id=$thisid'>$name2</a><br />";
+		}
+
+		$html .= "</div>";
+		echo $html;
+	?>
+</div>
+	
+	
+<?php
+	require_once("GLOBAL/foot.php"); 
+?>

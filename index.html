@@ -1,0 +1,99 @@
+<?php 
+	require_once("GLOBAL/head.php"); 
+?>
+
+
+<?php 
+if ( ($live) || ($dev) ) {
+?>
+		
+	
+	<!--  MAIN  -->
+	
+	<div id='main' class='mainContainer hidden'>
+
+		<?php
+		
+			// typeset TTHHEEFFOORRREEESSTT by choosing at random from any of the "tree" fonts
+			// random flags for <b> or <i>
+			// iterate through the letters of the phrase which is stored in a string, $forest
+			// $forest is passed in a query for dev
+
+			$hreflist = array();
+
+			if (!$forest) $forest = "TTHHEEFFOORRREEESSTT";
+
+                        while ( $i < strlen($forest) ) {
+
+				// select random font per tree
+
+                        	$webfont = rand(0,9);
+				$thistree = substr($forest, $i, 1);
+
+				if ($italic == 1) $italicswitch = rand(0,1);
+				if ($bold == 1) $boldswitch = rand(0,1);
+
+				// utility formatting
+				
+				$marginer = rand(5,15);
+				// $sizer = rand(75, 95) * .01;
+	
+				// random href
+				// ** fix ** this should require a database query to know how many choosing between
+
+				if ($i == 0) $thishref = 3; 
+				while (in_array($thishref, $hreflist)) $thishref = rand(7,26);
+				$hreflist[] = $thishref;
+
+				$html .= "\n	<a href='detail.html?id=" . $thishref . "'>";
+				$html .= "<div class = 'treeContainer tree black webfont-" . $webfont . "' style = 'margin:" . $marginer . "px;'>";
+
+				if ($italicswitch == 1) $html .= "<i>";
+				if ($boldswitch == 1) $html .= "<b>";
+				$html .= $thistree;
+				if ($italicswitch == 1) $html .= "</i>";
+				if ($boldswitch == 1) $html .= "</b>";
+
+				$html .= "</div>";
+				$html .= "</a>";
+
+				$i++;
+			}
+
+			echo $html;
+		?>
+
+
+		<?php
+/*
+		
+			// Query uses LEFT JOIN and multiple selection criteria to get objects with and without media from Front Page and News and return these in randomly sequenced rows . . . returns NULL if no media object attached to record
+
+			$returns = rand(3,8);			
+			$baseRecord = "_Home";
+
+			$sql    = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.active, objects.rank as objectsRank, objects.url, objects.end, wires.fromid, wires.toid, wires.active, media.id AS mediaId, media.object, media.type, media.caption AS mediaCaption, media.active, media.rank FROM objects, wires LEFT JOIN media ON media.object = wires.toid WHERE wires.fromid = (SELECT objects.id FROM objects WHERE objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1)  AND wires.toid = objects.id AND objects.active = 1 AND wires.active = 1 AND ((media.rank IS NULL AND media.active IS NULL) OR (media.rank = 1 AND media.active = 1) OR (media.active = 1)) ORDER BY RAND() LIMIT $returns";
+			
+			$result =  MYSQL_QUERY($sql);	
+
+			while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+					
+			}
+*/
+		?>
+
+
+
+	</div>
+	
+
+<?php 
+}
+?>
+
+
+<?php	
+	echo "\n\n\n\n\n";
+	require_once("GLOBAL/foot.php"); 
+?>
+
