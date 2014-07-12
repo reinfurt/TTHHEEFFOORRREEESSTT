@@ -40,9 +40,9 @@ objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1
 	                // $mediaStyle = "width: 100%;";
         	        $images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
 	                $images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-        	        // $images[$i] .= "<div class = 'captionContainer caption'>";
-	                // $images[$i] .= $mediaCaption . "<br /><br />";
-        	        // $images[$i] .= "</div>";
+        	        $images[$i] .= "<div class = 'captionContainer caption'>";
+	                $images[$i] .= $mediaCaption . "<br /><br />";
+        	        $images[$i] .= "</div>";
 	                $images[$i] .= "</div>";
         	        $i++;
 		}
