@@ -9,10 +9,10 @@
 
 				$html = $name1; 
 				$html .= "<br />";
-				$html .= "<a href='index.html'>Go home</a>";
+				$html .= "<a href='index.html'><img src='MEDIA/cursor-blink.gif'> Home</a>";
 			} else {
 
-				$html = "Home";
+				$html = "<img src='MEDIA/cursor-blink.gif'>";
 			}
 
 			$html .= "<br />";
