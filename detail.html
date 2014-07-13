@@ -24,10 +24,12 @@ require_once("GLOBAL/head.php");
 
 		// SQL object plus media	
 
-		$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as 
-objectsRank, wires.fromid, wires.toid, wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
-media.active, media.rank FROM objects, wires, media WHERE objects.id = $id AND wires.toid = objects.id AND media.object = 
-objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY media.rank;";
+		$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
+objects.active, objects.rank as objectsRank, wires.fromid, wires.toid, wires.active, media.id AS 
+mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM 
+objects, wires, media WHERE objects.id = $id AND wires.toid = objects.id AND media.object = 
+objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY 
+media.rank;";
 
 		$result =  MYSQL_QUERY($sql);
 		
@@ -35,19 +37,20 @@ objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1
 
         	        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
                 	$mediaCaption = strip_tags($myrow["caption"]);
-			$randWidth = rand(10, 40);
-	                $mediaStyle = "width: " . $randWidth . "%;";
-	                // $mediaStyle = "width: 100%;";
-        	        $images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
-	                $images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+	                $mediaStyle = "width: 100%;";        	        
+			$randWidth = rand(250, 600);
+        	        $images[$i] .= "<div class = 'imageContainerWrapper' style='width: " . $randWidth . "px;'>";
+			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
+			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
         	        $images[$i] .= "<div class = 'captionContainer caption'>";
-	                $images[$i] .= $mediaCaption . "<br /><br />";
+	                $images[$i] .= $i . " " . $mediaCaption . "<br /><br />";
         	        $images[$i] .= "</div>";
+	                $images[$i] .= "</div>";
 	                $images[$i] .= "</div>";
         	        $i++;
 		}
 
-		$html .= "<br /><br /><br /><br /><br />" . $body . "<br />";
+		$html .= "<br />" . $body . "<br />";
 		$html .= "</div>";
 
 

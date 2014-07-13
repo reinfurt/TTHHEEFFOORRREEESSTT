@@ -118,29 +118,30 @@ a.tooltip:hover span{
 	z-index: 10;
 	}	
 
-.imagesContainer {
-	position: relative;
-	top: 0px;
-	left: 5%;
-	width: 95%;
-	z-index: 0;
-	}	
-	
+.treeContainer {
+	float: left;
+	}
+
 .blankContainer {
 	float: left;
 	width: 300px;
 	height: 200px;
 	}
 	
-.treeContainer {
-	float: left;
-	}
+.imagesContainer {
+ 	overflow: auto;
+	z-index: 0;
+	}	
+
+.imageContainerWrapper {
+        float:left;
+        padding: 10px;
+        }
 
 .imageContainer {
-	text-align: center;
-	float: left;
-	}
-
+        padding: 100px;
+        }
+	
 .detailContainer {
 	width: 400px;
 	}
