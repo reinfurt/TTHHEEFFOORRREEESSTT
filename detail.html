@@ -20,16 +20,14 @@ require_once("GLOBAL/head.php");
 		$thistag = $myrow["url"];		
 		$html = "";
 		$html .= $deck . "<br />";
+		$i = 0;
 
 
-		// SQL object plus media	
+ 	       // SQL object plus media
 
-		$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
-objects.active, objects.rank as objectsRank, wires.fromid, wires.toid, wires.active, media.id AS 
-mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM 
-objects, wires, media WHERE objects.id = $id AND wires.toid = objects.id AND media.object = 
-objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY 
-media.rank;";
+        	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, media.id AS mediaId, 
+media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND 
+media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
 		$result =  MYSQL_QUERY($sql);
 		
@@ -72,7 +70,7 @@ media.rank;";
                 $html   = "<div id='relatednav' class='navContainer'>";
 		$html  .= "<br /><br />";
 		$html  .= "<br />* <br /><br />More $thistag . . . <br />";
-		$sql    = "SELECT id, name1 FROM objects WHERE objects.url LIKE '$thistag' ORDER BY name1;";
+		$sql    = "SELECT id, name1 FROM objects WHERE objects.url LIKE '$thistag' AND objects.active = '1' ORDER BY name1;";
 		$result =  MYSQL_QUERY($sql);
                         
 		while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {

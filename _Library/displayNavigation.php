@@ -69,16 +69,20 @@ function displayNavigation( $path = "0", $limit = null, $selection = null, $page
 		$html .= "'>";
 		$html .= "<a href='";
 
-		// Check if URL and whether full or partial
+
+		/*
+		// TTHHEEFFOORRREEESSTT hack, diable URL
 						
+		// Check if URL and whether full or partial
+
 		$pattern = "/html/";			
 		$URL = $row["url"];
 		if ( preg_match( $pattern, $URL ) ) $fullURL = TRUE;
+		*/
 		
-		// $html .= ($URL) ? $URL : "view";		// Casco-specific hack		
 		$html .= ($URL) ? $URL : $pageName;	// normal
 		
-		if ( !$fullURL ) $html .= ".php?id=$target";						
+		if ( !$fullURL ) $html .= ".html?id=$target";						
 
 		$html .= "'>";
 		$html .= $name;	

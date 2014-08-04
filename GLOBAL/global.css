@@ -49,6 +49,11 @@ a.tooltip:hover span{
 	color:#000;
 	}
 	
+ul {
+	/* override built-in webkit margin-before and margin-after */
+	margin: 0em;
+}
+
 .webfont-0 {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
@@ -280,15 +285,12 @@ a.tooltip:hover span{
 	}
 
 .active a {
-	color:#FC0;
 	}
 
 .active a:hover {
-	color:#000;
 	}
 
 .active a:active {
-	color:#FFF;
 	}
 
 .static {
@@ -296,15 +298,12 @@ a.tooltip:hover span{
 	}
 	
 .static a {
-	color:#000;
 	}
 
 .static a:hover {
-	color:#FC0;
 	}
 
 .static a:active {
-	color:#FFF;
 	}
 	
 .red {
@@ -353,6 +352,9 @@ a.tooltip:hover span{
 	padding: 0 0 0 16px;
 	}
 	
-	
+.greybox {
+        background-color: #CCC;
+        outline: 1px dotted #333;
+        }		
 	
 	

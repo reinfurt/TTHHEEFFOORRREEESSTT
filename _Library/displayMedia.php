@@ -196,8 +196,12 @@ function displayMediaPDF($file, $caption, $style, $link) {
 	if ($caption) $media .= " title='$caption' "; 
 	if (!$link) $link = $file;
 	$media .= " target='_blank'>";
-	$media  .= "<img src='MEDIA/pdf.gif'><br/>";
-	$media .= $link;
+
+	// TTHHEEFFOORRREEESSTT-specific hack
+
+	// $media  .= "<img src='MEDIA/pdf.gif'><br/>";
+	$media  .= "Download the PDF here<br/>";
+	// $media .= $link;
 	$media .= "</a>";
 	$status = $media;
 
