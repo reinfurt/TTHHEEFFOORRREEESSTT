@@ -72,7 +72,14 @@ if ( ($live) || ($dev) ) {
 			$returns = rand(3,8);			
 			$baseRecord = "_Home";
 
-			$sql    = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.active, objects.rank as objectsRank, objects.url, objects.end, wires.fromid, wires.toid, wires.active, media.id AS mediaId, media.object, media.type, media.caption AS mediaCaption, media.active, media.rank FROM objects, wires LEFT JOIN media ON media.object = wires.toid WHERE wires.fromid = (SELECT objects.id FROM objects WHERE objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1)  AND wires.toid = objects.id AND objects.active = 1 AND wires.active = 1 AND ((media.rank IS NULL AND media.active IS NULL) OR (media.rank = 1 AND media.active = 1) OR (media.active = 1)) ORDER BY RAND() LIMIT $returns";
+			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, 
+objects.active, objects.rank as objectsRank, objects.url, objects.end, wires.fromid, wires.toid, 
+wires.active, media.id AS mediaId, media.object, media.type, media.caption AS mediaCaption, 
+media.active, media.rank FROM objects, wires LEFT JOIN media ON media.object = wires.toid WHERE 
+wires.fromid = (SELECT objects.id FROM objects WHERE objects.name1 LIKE '$baseRecord' AND 
+objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = 1 AND wires.active = 
+1 AND ((media.rank IS NULL AND media.active IS NULL) OR (media.rank = 1 AND media.active = 1) OR 
+(media.active = 1)) ORDER BY RAND() LIMIT $returns;";
 			
 			$result =  MYSQL_QUERY($sql);	
 
