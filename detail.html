@@ -66,12 +66,16 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
                 
 
 		// SQL related objects
+	
+		$baseRecord = "Main";
 
                 $html   = "<div id='relatednav' class='navContainer'>";
 		$html  .= "<br /><br />";
 		$html  .= "<br />* <br /><br />More $thistag . . . <br />";
-		// $sql    = "SELECT id, name1 FROM objects WHERE objects.url LIKE '$thistag' AND objects.active = '1' ORDER BY name1;";
-		$sql = "SELECT objects.id, objects.name1, objects.active, wires.active FROM objects, wires WHERE objects.url LIKE '$thistag' AND objects.active = '1' AND wires.fromid = '0' AND wires.toid = objects.id AND wires.active=1 ORDER BY objects.name1;";
+			
+		$sql = "SELECT objects.id, objects.name1, objects.active, wires.active FROM objects, wires WHERE objects.url LIKE '$thistag' AND objects.active = '1' AND wires.fromid = (SELECT objects.id 
+FROM objects WHERE objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND wires.active=1 ORDER BY objects.name1;";
+
 		$result =  MYSQL_QUERY($sql);
                         
 		while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {

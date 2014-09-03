@@ -33,7 +33,7 @@
 
 	// Get $dev strings
 
-	$forest = $_REQUEST['forest'];
+	$forrest = $_REQUEST['forrest'];
 	$italic = $_REQUEST['italic'];
 	$bold = $_REQUEST['bold'];
 	

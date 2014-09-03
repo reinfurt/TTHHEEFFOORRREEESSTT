@@ -200,7 +200,7 @@ function displayMediaPDF($file, $caption, $style, $link) {
 	// TTHHEEFFOORRREEESSTT-specific hack
 
 	// $media  .= "<img src='MEDIA/pdf.gif'><br/>";
-	$media  .= "Download the PDF here<br/>";
+	$media  .= "Download PDF<br/>";
 	// $media .= $link;
 	$media .= "</a>";
 	$status = $media;
