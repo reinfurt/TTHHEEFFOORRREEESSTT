@@ -21,7 +21,7 @@ if ( ($live) || ($dev) ) {
 
 			$baseRecord = "Main";
 			$forrest =  (!$forrest) ? "TTHHEEFFOORRREEESSTT" : $forrest;
-			$returns = (strlen($forrest) > 20) ? 19 : strlen($forrest) - 1;
+			$returns = (strlen($forrest) > 20) ? 20 : strlen($forrest);
 
 			// sql (first tree)
 
@@ -42,9 +42,12 @@ objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1) AND wires.toid 
 
 			$result =  MYSQL_QUERY($sql);	
 
-			while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+			while ($i <= strlen($forrest)) {
 
-				// select random font per tree
+				$myrow  =  MYSQL_FETCH_ARRAY($result);
+				$thishref = ($i == 0) ? $firstTree : $myrow['objectsId'];
+
+				// select random font per tree	
 
                         	$webfont = rand(0,9);
 				$thistree = substr($forrest, $i, 1);
@@ -56,10 +59,6 @@ objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1) AND wires.toid 
 				
 				$marginer = rand(5,15);
 				// $sizer = rand(75, 95) * .01;
-	
-				// random href
-
-				$thishref = ($i == 0) ? $firstTree : $myrow['objectsId'];
 
 				$html .= "\n	<a href='detail.html?id=" . $thishref . "'>";
 				$html .= "<div class = 'treeContainer tree black webfont-" . $webfont . "' style = 'margin:" . $marginer . "px;'>";
