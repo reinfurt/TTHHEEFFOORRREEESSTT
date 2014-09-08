@@ -24,11 +24,10 @@
 
 	$dev = $_REQUEST['dev'];
 	$dev = systemCookie("devCookie", $dev, 0);
-	$sql    = "SELECT deck FROM objects WHERE objects.name1 LIKE 'Live';";
+	$sql    = "SELECT id, deck FROM objects WHERE name1 LIKE 'Live' AND active=1 LIMIT 1;";	
 	$result =  MYSQL_QUERY($sql);
 	$myrow  =  MYSQL_FETCH_ARRAY($result);
-	$deck = $myrow["deck"];
-	if ( $deck == '1' ) $live = TRUE;
+	if ( $myrow["deck"] == '1' ) $live = TRUE;
 	if (!$dev && !$live) die('Under construction . . .');
 
 	// Get $dev strings
