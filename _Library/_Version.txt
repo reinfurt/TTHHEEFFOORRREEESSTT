@@ -1,7 +1,7 @@
 // O-R-G 
-// _Library version 1.3.0
+// _Library version 1.4.0
 //
-// Last updated July 17, 2013
+// Last updated July 30, 2014
 // 
 // Built on _ Library functions by Stewart Smith while at O-R-G
 // Updated and expanded by David Reinfurt
@@ -15,3 +15,4 @@
 6/22/2011 -- displayNavigation added multiColumn settings
 6/27/2011 -- displayMedia added display PNG function
 7/17/2013 -- added paypalIPNlisten, paypalIPNwrite
+7/30/2014 -- added orgRSSajax.php

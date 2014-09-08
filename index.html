@@ -25,20 +25,19 @@ if ( ($live) || ($dev) ) {
 
 			// sql (first tree)
 
-			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.active FROM objects, wires 
-WHERE objects.name1 LIKE 'Biography' AND wires.toid = objects.id AND objects.active = 1 AND wires.active = 1 
-LIMIT 1;";
+			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.active FROM objects, wires WHERE 
+objects.name1 LIKE 'Biography' AND wires.toid = objects.id AND objects.active = 1 AND wires.active = 1 LIMIT 1;";
 
 			$result =  MYSQL_QUERY($sql);	
 			$myrow  =  MYSQL_FETCH_ARRAY($result);
 			$firstTree = $myrow["objectsId"];
 
 			// sql all top level objects (connected to Main)
-		
+
 			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.active, wires.fromid, 
-wires.toid, wires.active FROM objects, wires WHERE wires.fromid = (SELECT objects.id FROM objects WHERE 
-objects.name1 LIKE '$baseRecord' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = 
-1 AND wires.active = 1 ORDER BY RAND() LIMIT $returns;";
+wires.toid, wires.active FROM objects, wires WHERE wires.fromid = (SELECT objects.id FROM objects WHERE objects.name1 
+LIKE '$baseRecord' AND objects.active='1' LIMIT 1) AND objects.name1 NOT LIKE '.%' AND wires.toid= objects.id AND 
+objects.active = 1 AND wires.active = 1 ORDER BY RAND() LIMIT $returns;";
 
 			$result =  MYSQL_QUERY($sql);	
 
